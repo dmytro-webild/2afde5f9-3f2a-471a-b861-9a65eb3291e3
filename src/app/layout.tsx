@@ -1,0 +1,52 @@
+import type { Metadata } from "next";
+import { Halant } from "next/font/google";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import "@/lib/gsap-setup";
+import { ServiceWrapper } from "@/components/ServiceWrapper";
+import Tag from "@/tag/Tag";
+import { getVisualEditScript } from "@/utils/visual-edit-script";
+import { Mulish } from "next/font/google";
+
+
+
+export const metadata: Metadata = {
+  title: 'Nunnery Roofing & Remodeling Co.',
+  description: 'Professional roofing and remodeling services you can trust. Built to last and done right.',
+  openGraph: {
+    "title": "Nunnery Roofing & Remodeling Co.",
+    "description": "Professional roofing and remodeling services.",
+    "siteName": "Nunnery Roofing & Remodeling Co."
+  },
+};
+
+const mulish = Mulish({
+  variable: "--font-mulish",
+  subsets: ["latin"],
+});
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <ServiceWrapper>
+        <body className={`${mulish.variable} ${inter.variable} antialiased`}>
+          <Tag />
+          {children}
+          <script
+              dangerouslySetInnerHTML={{
+                  __html: `${getVisualEditScript()}`
+              }}
+          />
+        </body>
+      </ServiceWrapper>
+    </html>
+  );
+}
